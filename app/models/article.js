@@ -6,6 +6,7 @@ function Article (opts) {
   this.title = opts.title || '';
   this.url = opts.url || '';
   this.text = opts.text || '';
+  this.news = opts.news || ''; 
 }
 
 module.exports = Article;
