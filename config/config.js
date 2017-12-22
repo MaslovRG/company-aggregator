@@ -9,6 +9,7 @@ const config = {
       name: 'company-aggregator'
     },
     port: process.env.PORT || 3000,
+    db: 'mongodb://localhost/aggregatorDB-development', 
   },
 
   test: {
@@ -17,6 +18,7 @@ const config = {
       name: 'company-aggregator'
     },
     port: process.env.PORT || 3000,
+    db: 'mongodb://localhost/aggregatorDB-test',
   },
 
   production: {
@@ -25,6 +27,7 @@ const config = {
       name: 'company-aggregator'
     },
     port: process.env.PORT || 3000,
+    db: 'mongodb://localhost/aggregatorDB-production',
   }
 };
 

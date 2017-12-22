@@ -19,6 +19,7 @@
     "glob": "^6.0.4",
     "jquery": "^3.2.1",
     "method-override": "^2.3.0",
+    "mongoose": "^4.13.7",
     "morgan": "^1.6.1",
     "rss-parser": "^2.11.0",
     "serve-favicon": "^2.3.0"
