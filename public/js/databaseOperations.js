@@ -1,5 +1,9 @@
 const Company = require('../../app/models/company');
 
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId; 
+var User = mongoose.model('User');
+
 var company1 = new Company({
     name : 'Facebook'
 }); 
@@ -11,39 +15,77 @@ var companies = [company1, company2];
 
 function DatabaseOperations()
 {   
-    this.CreateNewUser = function()
-    {
-        return "1"; 
-    }
-
-    this.GetCompaniesById = function(id)
-    {        
-        return companies; 
-    }
-
-    this.GetOrCreateId = function(req, res)
+    this.GetOrCreateId = function(req, res, callback)
     {
         var id = req.cookies["id"]; 
         if (!id)
         {
-            id = this.CreateNewUser(); 
-            res.cookie('id', id, { maxAge: 900000, httpOnly: true });
+            this.CreateNewUser(function(id){
+                res.cookie('id', id, { maxAge: 900000, httpOnly: true });
+                callback(id); 
+            });             
         }
-        return id; 
+        else
+        {
+            callback(id); 
+        }
+        
     }
 
-    this.GetCompanies = function(req, res)
+    this.CreateNewUser = function(callback)
     {
-        var id = this.GetOrCreateId(req, res); 
-        var companies = this.GetCompaniesById(id); 
-        return companies; 
+        var ncompanies = [];
+        var index; 
+        for (index = 0; index < companies.length; index++)
+        {
+            ncompanies[ncompanies.length] = new Company({ name : companies[index].name}); 
+        } 
+        var ou = new Object({
+            companies : ncompanies
+        }); 
+        var user = new User(ou); 
+
+        user.save(function (err) {
+            if (err)
+                console.log(err);
+            else
+            {
+                console.log(user._id + ' was written to db');
+                var nid = user._id.toString(); 
+                callback(nid); 
+            }
+        }); 
     }
 
-    this.AddCompany = function(req, res)
+    this.GetUser = function(id, callback)
     {
-        var tempcompanies = this.GetCompanies(req, res); 
-        tempcompanies[tempcompanies.length] = req.body; 
-        return companies; 
+        User.findById(id, function(err, user){
+            if (!err)
+            {
+                callback(user); 
+            }            
+        }); 
+    }
+
+    this.GetCompanies = function(id, callback)
+    {               
+        User.findById(id, function(err, user){
+            if (!err)
+            {
+                var ncompanies = user.companies; 
+                callback(ncompanies); 
+            }            
+        }); 
+    }
+
+    this.AddCompany = function(id, company, callback)
+    {
+        this.GetUser(id, function(user){              
+            user.companies[user.companies.length] = new Company({ name: company.name});                         
+            user.save((err, updateUser) => {
+                callback(updateUser.companies);
+            });              
+        });  
     }
 }
 

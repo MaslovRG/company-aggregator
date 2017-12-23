@@ -10,19 +10,29 @@ module.exports = (app) => {
 var databaseOperations = new DOs(); 
 
 router.get('/companies', (req, res, next) => {	
-    var companies = databaseOperations.GetCompanies(req, res); 
-    
-    res.render('companies', {
-        title : 'Агрегатор компаний',
-        companies : companies
+    databaseOperations.GetOrCreateId(req, res, (id) => 
+    {
+        databaseOperations.GetCompanies(id, (companies) => {
+            res.render('companies', {
+                title : 'Агрегатор компаний',
+                companies : companies
+            }); 
+        });   
     }); 
+      
 });
 
 router.post('/companies', (req, res, next) => {
-    var companies = databaseOperations.AddCompany(req, res);
- 
-    res.render('companies', {
-        title : 'Агрегатор компаний',
-        companies : companies
+    databaseOperations.GetOrCreateId(req, res, (id) =>
+    {
+        databaseOperations.AddCompany(id, req.body, (companies) => {
+            res.render('companies', {
+                title : 'Агрегатор компаний',
+                companies : companies
+            }); 
+        });
     }); 
+    
+ 
+    
 }); 

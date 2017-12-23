@@ -17,37 +17,39 @@ router.get('/', (req, res, next) => {
   var news = []; 
 
   var countCB = 0;  
-  var companies = databaseOperations.GetCompanies(req, res); 
-  adresses.forEach(adress => 
+  databaseOperations.GetOrCreateId(req, res, (id) => {
+    databaseOperations.GetCompanies(id, (companies) =>
     {
-      parser.parseURL(adress, function(err, parsed) 
+      adresses.forEach(adress => 
       {
-        var HaveCompany; 
-        parsed.feed.entries.forEach(function(entry) 
+        parser.parseURL(adress, (err, parsed) =>
         {
-          companies.forEach(company =>
+          var HaveCompany; 
+          parsed.feed.entries.forEach((entry) =>
           {
-            HaveCompany = entry.title.indexOf(company.name); 
-            if (HaveCompany + 1)
+            companies.forEach(company =>
             {
-              news[news.length] = new News({
-                title: entry.title, 
-                content: entry.content
-              })
-            } 
-          })              
-        }); 
-        countCB++; 
-        if (countCB == adresses.length)
-        {
-          res.render('index', {
-            title: 'Агрегатор компаний',
-            news: news
+              HaveCompany = entry.title.indexOf(company.name); 
+              if (HaveCompany + 1)
+              {
+                news[news.length] = new News({
+                  title: entry.title, 
+                  content: entry.content
+                })
+              } 
+            })              
           }); 
-        }
-      })
-      
-    });
-    
+          countCB++; 
+          if (countCB == adresses.length)
+          {
+            res.render('index', {
+              title: 'Агрегатор компаний',
+              news: news
+            }); 
+          }
+        })
         
+      });
+  }); 
+  });     
 });
