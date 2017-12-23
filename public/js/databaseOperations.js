@@ -10,13 +10,7 @@ var company2 = new Company({
 var companies = [company1, company2]; 
 
 function DatabaseOperations()
-{
-    this.AddCompany = function(company)
-    {
-        var ll = companies; 
-        ll[ll.length] = company; 
-    }
-
+{   
     this.CreateNewUser = function()
     {
         return "1"; 
@@ -38,10 +32,17 @@ function DatabaseOperations()
         return id; 
     }
 
-    this.GetCompaniesByGetId = function(req, res)
+    this.GetCompanies = function(req, res)
     {
         var id = this.GetOrCreateId(req, res); 
         var companies = this.GetCompaniesById(id); 
+        return companies; 
+    }
+
+    this.AddCompany = function(req, res)
+    {
+        var tempcompanies = this.GetCompanies(req, res); 
+        tempcompanies[tempcompanies.length] = req.body; 
         return companies; 
     }
 }

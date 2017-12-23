@@ -10,7 +10,7 @@ module.exports = (app) => {
 var databaseOperations = new DOs(); 
 
 router.get('/companies', (req, res, next) => {	
-    var companies = databaseOperations.GetCompaniesByGetId(req, res); 
+    var companies = databaseOperations.GetCompanies(req, res); 
     
     res.render('companies', {
         title : 'Агрегатор компаний',
@@ -19,9 +19,8 @@ router.get('/companies', (req, res, next) => {
 });
 
 router.post('/companies', (req, res, next) => {
-    databaseOperations.AddCompany(req.body);
-
-    var companies = databaseOperations.GetCompaniesByGetId(req, res); 
+    var companies = databaseOperations.AddCompany(req, res);
+ 
     res.render('companies', {
         title : 'Агрегатор компаний',
         companies : companies
