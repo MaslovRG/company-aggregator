@@ -1,7 +1,11 @@
 <% include header %>
 
   <h1><%-title %></h1>
-  <p>Добро пожаловать в <%-title %></p>
-  <p><%-news %></p>
+    <ul>
+	    <% for(var i=0; i < news.length; i++) {%>
+            <li><p><b><%-news[i].title%></b></p>
+            <p><%-news[i].content%></p></li>
+	    <% } %>
+    </ul>
 
 <% include footer %>

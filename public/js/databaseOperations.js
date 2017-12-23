@@ -10,6 +10,24 @@ function DatabaseOperations()
         var companies = ['Facebook', 'Apple']; 
         return companies; 
     }
+
+    this.GetOrCreateId = function(req, res)
+    {
+        var id = req.cookies["id"]; 
+        if (!id)
+        {
+            id = this.CreateNewUser(); 
+            res.cookie('id', id, { maxAge: 900000, httpOnly: true });
+        }
+        return id; 
+    }
+
+    this.GetCompaniesByGetId = function(req, res)
+    {
+        var id = this.GetOrCreateId(req, res); 
+        var companies = this.GetCompaniesById(id); 
+        return companies; 
+    }
 }
 
 module.exports = DatabaseOperations; 

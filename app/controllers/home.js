@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Article = require('../models/article');
+const News = require('../models/news');
 const DOs = require('../../public/js/databaseOperations'); 
 var parser = require('rss-parser');
 
 module.exports = (app) => {
   app.use('/', router);
 };
-
 
 var adress1 = 'http://feeds.feedburner.com/texnomaniya/internet-news';
 var adress2 = 'https://news.yandex.ru/computers.rss'; 
@@ -16,15 +15,9 @@ var countCB = 0;
 var databaseOperations = new DOs(); 
 
 router.get('/', (req, res, next) => {	
-  const articles = [new Article(), new Article()];
-  var id = req.cookies["id"]; 
-  if (!id)
-  {
-    id = databaseOperations.CreateNewUser(); 
-    res.cookie('id', id, { maxAge: 900000, httpOnly: true });
-  }
+  var news = []; 
+  var id = databaseOperations.GetOrCreateId(req, res); 
 
-  var news = ""; 
   var countCB = 0; 
   var companies = databaseOperations.GetCompaniesById(id); 
   adresses.forEach(adress => 
@@ -34,24 +27,23 @@ router.get('/', (req, res, next) => {
         var HaveCompany; 
         parsed.feed.entries.forEach(function(entry) 
         {
-          console.log(entry.title + "\n");
           companies.forEach(company =>
           {
             HaveCompany = entry.title.indexOf(company); 
             if (HaveCompany + 1)
             {
-              news += "<p><b>" + entry.title + "</b></p>" + "\n";  
-              news += "<p>" + entry.content + "</p>" + "\n"; 
+              news[news.length] = new News({
+                title: entry.title, 
+                content: entry.content
+              })
             } 
-          })
-              
+          })              
         }); 
         countCB++; 
         if (countCB == adresses.length)
         {
           res.render('index', {
             title: 'Агрегатор компаний',
-            articles: articles, 
             news: news
           }); 
         }

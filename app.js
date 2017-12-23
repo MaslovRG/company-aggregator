@@ -6,7 +6,6 @@ const config = require('./config/config');;
 const app = express();
 
 var mongoose = require('mongoose');
-
 mongoose.connect(config.db, {
   useMongoClient: true,
   /* other options */

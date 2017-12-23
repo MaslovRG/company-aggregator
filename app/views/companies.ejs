@@ -1,0 +1,11 @@
+<% include header %>
+
+    <h1><%-title %></h1>
+
+    <ul>
+	    <% for(var i=0; i < companies.length; i++) {%>
+            <li><p><%-company[i].name%></p></li>
+	    <% } %>
+    </ul>
+
+<% include footer %>
