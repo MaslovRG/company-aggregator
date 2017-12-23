@@ -15,10 +15,11 @@ var databaseOperations = new DOs();
 
 router.get('/', (req, res, next) => {	
   var news = []; 
-  var id = databaseOperations.GetOrCreateId(req, res); 
+  //var id = databaseOperations.GetOrCreateId(req, res); 
 
   var countCB = 0; 
-  var companies = databaseOperations.GetCompaniesById(id); 
+  //var companies = databaseOperations.GetCompaniesById(id); 
+  var companies = databaseOperations.GetCompaniesByGetId(req, res); 
   adresses.forEach(adress => 
     {
       parser.parseURL(adress, function(err, parsed) 
@@ -28,7 +29,7 @@ router.get('/', (req, res, next) => {
         {
           companies.forEach(company =>
           {
-            HaveCompany = entry.title.indexOf(company); 
+            HaveCompany = entry.title.indexOf(company.name); 
             if (HaveCompany + 1)
             {
               news[news.length] = new News({

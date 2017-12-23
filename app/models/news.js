@@ -1,6 +1,3 @@
-// Example model
-
-
 function News (opts) {
   if(!opts) opts = {};
   this.title = opts.title || '';

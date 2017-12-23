@@ -1,3 +1,5 @@
+const Company = require('../../app/models/company');
+
 function DatabaseOperations()
 {
     this.CreateNewUser = function()
@@ -7,7 +9,13 @@ function DatabaseOperations()
 
     this.GetCompaniesById = function(id)
     {
-        var companies = ['Facebook', 'Apple']; 
+        var company1 = new Company({
+            name : 'Facebook'
+        }); 
+        var company2 = new Company({
+            name : 'Apple'
+        }); 
+        var companies = [company1, company2]; 
         return companies; 
     }
 
