@@ -2,16 +2,15 @@ const express = require('express');
 const router = express.Router();
 const News = require('../models/news');
 const DOs = require('../../public/js/databaseOperations'); 
+const AOs = require('../../public/js/adressesOperations'); 
 var parser = require('rss-parser');
 
 module.exports = (app) => {
   app.use('/', router);
 };
 
-var adress1 = 'http://feeds.feedburner.com/texnomaniya/internet-news';
-var adress2 = 'https://news.yandex.ru/computers.rss'; 
-var adresses = [adress1, adress2]; 
-var countCB = 0; 
+var adressesOperations = new AOs(); 
+var adresses = adressesOperations.GetAdresses();  
 var databaseOperations = new DOs(); 
 
 router.get('/', (req, res, next) => {	
