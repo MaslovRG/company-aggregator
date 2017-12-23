@@ -18,3 +18,12 @@ router.get('/companies', (req, res, next) => {
     }); 
 });
 
+router.post('/companies', (req, res, next) => {
+    databaseOperations.AddCompany(req.body);
+
+    var companies = databaseOperations.GetCompaniesByGetId(req, res); 
+    res.render('companies', {
+        title : 'Агрегатор компаний',
+        companies : companies
+    }); 
+}); 

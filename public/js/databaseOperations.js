@@ -1,21 +1,29 @@
 const Company = require('../../app/models/company');
 
+var company1 = new Company({
+    name : 'Facebook'
+}); 
+var company2 = new Company({
+    name : 'Apple'
+}); 
+
+var companies = [company1, company2]; 
+
 function DatabaseOperations()
 {
+    this.AddCompany = function(company)
+    {
+        var ll = companies; 
+        ll[ll.length] = company; 
+    }
+
     this.CreateNewUser = function()
     {
         return "1"; 
     }
 
     this.GetCompaniesById = function(id)
-    {
-        var company1 = new Company({
-            name : 'Facebook'
-        }); 
-        var company2 = new Company({
-            name : 'Apple'
-        }); 
-        var companies = [company1, company2]; 
+    {        
         return companies; 
     }
 
