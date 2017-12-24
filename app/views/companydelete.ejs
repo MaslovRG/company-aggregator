@@ -1,16 +1,24 @@
 <% include header %>
-
-    <h1><%-title %></h1>
-
-    <p>Вы уверены, что хотите удалить <%-companyName %> из списка компаний?</p>
-
-    <div>
-        <form method="post" action=<%-companyName %>>
-            <input type="submit" value="Удалить"/>
-        </form>
-        <form action="companies">
-            <button type="submit">Отмена</button>
-        </form>
-    </div>
+<div class="android-content mdl-layout__content">
+        <a name="top"></a>
+        
+       <div class="android-more-section">
+         <div class="android-card-container mdl-grid">
+           <div class="mdl-cell mdl-cell--10-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+             <div class="mdl-card__title">
+                <h4 class="mdl-card__title-text">Вы уверены, что хотите удалить <%-companyName %> из списка компаний?</h4>			
+             </div>
+             <div class="mdl-card__supporting-text">
+                <form method="post" action=<%-companyName %>>
+                    <input class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" type="submit" value="Удалить"/>
+                </form>
+                <form action="companies">
+                    <button class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" type="submit">Отмена</button>
+                </form>               
+             </div> 
+           </div>			
+         </div>	
+       </div>
+     </div>
 
 <% include footer %>

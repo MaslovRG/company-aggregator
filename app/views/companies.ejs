@@ -1,19 +1,26 @@
 <% include header %>
-
-    <h1><%-title %></h1>
-
-    <ul>
-	    <% for(var i=0; i < companies.length; i++) {%>
-            <li><p><span class="delactivator"><%-companies[i].name%></span>  
-                <a href=<%-"companies/delete/"+companies[i].name %> class="delhover">удалить</a></p></li>
-	    <% } %>
-    </ul>
-
-    <div>
-        <form method="post" action="companies">
-            <input name="name"/>
-            <input type="submit" value="Добавить"/>
-        </form>
-    </div>
+<div class="android-content mdl-layout__content">
+    <a name="top"></a>
+    
+   <div class="android-more-section">
+     <div class="android-section-title mdl-typography--display-1-color-contrast">Компании</div>
+     <div class="android-card-container mdl-grid">
+       <div class="mdl-cell mdl-cell--10-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+         <% for(var i=0; i < companies.length; i++) {%>
+         <div class="mdl-card__title">
+            <h4 class="mdl-card__title-text" class="delactivator"><span class="delactivator"><%-companies[i].name%> &emsp;</span>
+                <a href=<%-"companies/delete/"+companies[i].name %> class="delhover">удалить</a></h4>			
+         </div>
+         <% } %>
+         <div class="mdl-card__supporting-text">
+           <form method="post" action="companies">
+                   <p><input name="name"/></p>
+                   <p><input class="android-link mdl-button mdl-js-button mdl-typography--text-uppercase" type="submit" value="Добавить"/></p>
+           </form>
+         </div> 
+       </div>			
+     </div>	
+   </div>
+ </div>
 
 <% include footer %>

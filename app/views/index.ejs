@@ -1,11 +1,23 @@
 <% include header %>
 
-  <h1><%-title %></h1>
-    <ul>
-	    <% for(var i=0; i < news.length; i++) {%>
-            <li><p><b><%-news[i].title%></b></p>
-            <p><%-news[i].content%></p></li>
-	    <% } %>
-    </ul>
+<div class="android-content mdl-layout__content">
+<a name="top"></a>
+<div class="android-more-section">
+   <div class="android-section-title mdl-typography--display-1-color-contrast">Новости по компаниям</div>
+   <% for(var i=0; i < news.length; i++) {%>
+   <div class="android-card-container mdl-grid">
+     <div class="mdl-cell mdl-cell--10-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card mdl-shadow--3dp">
+       
+       <div class="mdl-card__title">
+          <h4 class="mdl-card__title-text"><%-news[i].title%></h4>
+       </div>
+       <div class="mdl-card__supporting-text">
+         <span class="mdl-typography--font-light mdl-typography--subhead"><%-news[i].content%></span>
+       </div>              
+     </div>			
+   </div>	
+   <% } %>	  
+ </div>
+</div>
 
 <% include footer %>
