@@ -1,4 +1,4 @@
-const Company = require('../../app/models/company');
+const Company = require('../models/company');
 
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId; 

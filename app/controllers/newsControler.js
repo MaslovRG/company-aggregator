@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const News = require('../models/news');
-const DOs = require('../../public/js/databaseOperations'); 
-const AOs = require('../../public/js/adressesOperations'); 
+const DOs = require('../operations/databaseOperations'); 
+const AOs = require('../operations/adressesOperations'); 
 var parser = require('rss-parser');
 
 module.exports = (app) => {

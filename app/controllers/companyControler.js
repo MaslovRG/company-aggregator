@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Company = require('../models/company');
-const DOs = require('../../public/js/databaseOperations'); 
+const DOs = require('../operations/databaseOperations'); 
 
 module.exports = (app) => {
     app.use('/', router);
