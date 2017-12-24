@@ -4,14 +4,15 @@
 
     <ul>
 	    <% for(var i=0; i < companies.length; i++) {%>
-            <li><p><span class="delactivator"><%-companies[i].name%></span>  <span class="delhover">Удалить</span></p></li>
+            <li><p><span class="delactivator"><%-companies[i].name%></span>  
+                <a href=<%-"companies/delete/"+companies[i].name %> class="delhover">удалить</a></p></li>
 	    <% } %>
     </ul>
 
     <div>
         <form method="post" action="companies">
             <input name="name"/>
-            <input type="submit"/>
+            <input type="submit" value="Добавить"/>
         </form>
     </div>
 

@@ -33,16 +33,17 @@ router.post('/companies', (req, res, next) => {
     });   
 }); 
 
-router.delete('/companies', (req, res, next) => {
-    
-    /*databaseOperations.GetOrCreateId(req, res, (id) =>
-    {
-        databaseOperations.DeleteCompany(id, req.body, (companies) =>
-        {
-            res.render('companies', {
-                title : 'Агрегатор компаний',
-                companies : companies
-            }); 
-        })
-    })*/
+router.get('/companies/delete/:companyName', (req, res, next) => 
+{
+    res.render('companydelete', {
+        title : 'Агрегатор компаний',
+        companyName : req.params.companyName
+    });     
+});
+
+router.post('/companies/delete/:companyName', (req, res, next) =>
+{
+    console.log('deleted!'); 
+
+    res.redirect('/companies'); 
 });
