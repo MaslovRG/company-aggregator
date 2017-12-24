@@ -19,7 +19,6 @@ router.get('/companies', (req, res, next) => {
             }); 
         });   
     }); 
-      
 });
 
 router.post('/companies', (req, res, next) => {
@@ -31,8 +30,19 @@ router.post('/companies', (req, res, next) => {
                 companies : companies
             }); 
         });
-    }); 
-    
- 
-    
+    });   
 }); 
+
+router.delete('/companies', (req, res, next) => {
+    
+    /*databaseOperations.GetOrCreateId(req, res, (id) =>
+    {
+        databaseOperations.DeleteCompany(id, req.body, (companies) =>
+        {
+            res.render('companies', {
+                title : 'Агрегатор компаний',
+                companies : companies
+            }); 
+        })
+    })*/
+});

@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override'); 
+const $ = require('jquery'); 
 //const mongoose = require('mongoose');
 
 module.exports = (app, config) => {

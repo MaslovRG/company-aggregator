@@ -2,20 +2,15 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 a {
   color: #00B7FF;
 }
-
-.delhover {  
+.delhover {
   opacity: 0;
 }
-
 .delhover:hover {
   opacity: 1;
 }
-
-.delactivator:hover+.delhover {
-  opacity: 1
+.delactivator:hover + .delhover {
+  opacity: 1;
 }
-
