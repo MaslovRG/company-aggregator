@@ -80,11 +80,22 @@ function DatabaseOperations()
 
     this.AddCompany = function(id, company, callback)
     {
-        this.GetUser(id, function(user){              
-            user.companies[user.companies.length] = new Company({ name: company.name});                         
-            user.save((err, updateUser) => {
-                callback(updateUser.companies);
-            });              
+        this.GetUser(id, function(user){  
+            var isAdd = true; 
+            var index; 
+            for (index = 0; index < user.companies.length && isAdd; index++)
+            {
+                isAdd = (company.name != user.companies[index].name); 
+            }            
+            if (isAdd)
+            {
+                user.companies[user.companies.length] = new Company({ name: company.name});                         
+                user.save((err, updateUser) => {
+                    callback(updateUser.companies);
+                });
+            }
+            else
+                callback(user.companies);                           
         });  
     }
 
