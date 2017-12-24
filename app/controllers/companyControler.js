@@ -43,7 +43,13 @@ router.get('/companies/delete/:companyName', (req, res, next) =>
 
 router.post('/companies/delete/:companyName', (req, res, next) =>
 {
-    console.log('deleted!'); 
-
-    res.redirect('/companies'); 
+    var companyName = req.params.companyName; 
+    
+    databaseOperations.GetOrCreateId(req, res, (id) =>
+    {
+        databaseOperations.DeleteCompany(id, companyName, () =>
+        {
+            res.redirect('/companies');
+        }); 
+    });     
 });

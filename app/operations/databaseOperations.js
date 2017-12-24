@@ -87,6 +87,23 @@ function DatabaseOperations()
             });              
         });  
     }
+
+    this.DeleteCompany = function(id, companyName, callback)
+    {
+        this.GetUser(id, function(user){     
+            var index;       
+            for (index = user.companies.length - 1; index >= 0; index--)
+            {
+                if (user.companies[index].name == companyName)
+                {
+                    user.companies.splice(index, 1); 
+                }
+            }                       
+            user.save((err, updateUser) => {
+                callback();
+            });              
+        });  
+    }
 }
 
 module.exports = DatabaseOperations; 
